@@ -2,7 +2,7 @@
 
 set -e
 
-REPO_DIR="$HOME/.tb-dev-shell"
+REPO_DIR="$HOME/Desktop/TeamBenSDK/tb-dev-shell"
 GIT_REPO="https://github.com/k0nics/tb-dev-shell.git"
 
 echo "Installing TB Dev Shell..."
