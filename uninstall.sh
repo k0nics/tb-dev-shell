@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_DIR="$HOME/.tb-dev-shell"
+REPO_DIR="$HOME/Desktop/TeamBenSDK/tb-dev-shell"
 
 echo "Uninstalling TB Dev Shell..."
 
