@@ -1,0 +1,115 @@
+#!/bin/bash
+
+REPO_DIR="$HOME/Desktop/TeamBenSDK/tb-dev-shell"
+VERSION_FILE="$REPO_DIR/VERSION"
+
+COMMAND=$1
+ARG2=$2
+
+show_help() {
+    echo ""
+    echo "TB Dev Shell CLI"
+    echo "================================="
+    echo ""
+    echo "Usage:"
+    echo "  tb <command>"
+    echo ""
+    echo "Development"
+    echo "  fresh"
+    echo "  migrate"
+    echo "  serve"
+    echo "  tinker"
+    echo "  cache-clear"
+    echo ""
+    echo "Git"
+    echo "  gs"
+    echo "  gp"
+    echo "  gl"
+    echo "  gc <message>"
+    echo "  gco <branch>"
+    echo ""
+    echo "Node"
+    echo "  dev"
+    echo "  build"
+    echo "  install"
+    echo ""
+    echo "System"
+    echo "  update"
+    echo "  version"
+    echo "  help"
+    echo "================================="
+    echo ""
+}
+
+case "$COMMAND" in
+
+fresh)
+    php artisan migrate:fresh --seed
+;;
+
+migrate)
+    php artisan migrate
+;;
+
+serve)
+    php artisan serve
+;;
+
+tinker)
+    php artisan tinker
+;;
+
+cache-clear)
+    php artisan optimize:clear
+;;
+
+dev)
+    npm run dev
+;;
+
+build)
+    npm run build
+;;
+
+install)
+    npm install
+;;
+
+gs)
+    git status
+;;
+
+gp)
+    git push
+;;
+
+gl)
+    git pull
+;;
+
+gc)
+    git commit -m "$ARG2"
+;;
+
+gco)
+    git checkout "$ARG2"
+;;
+
+update)
+    cd "$REPO_DIR" && git pull --quiet
+    echo "TB Dev Shell updated"
+;;
+
+version)
+    if [ -f "$VERSION_FILE" ]; then
+        cat "$VERSION_FILE"
+    else
+        echo "Version file not found"
+    fi
+;;
+
+help|*)
+    show_help
+;;
+
+esac
