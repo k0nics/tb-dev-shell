@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 alias gs="git status"
 alias gp="git push"
 alias gl="git pull"

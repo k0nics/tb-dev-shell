@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  shell:
+    name: Shell validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Validate Bash syntax
+        run: bash -n install.sh uninstall.sh bin/tb shell/*.sh
+
+      - name: Install ShellCheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes shellcheck
+
+      - name: Run ShellCheck
+        run: shellcheck --severity=warning install.sh uninstall.sh bin/tb shell/*.sh
+
+      - name: Validate version format
+        run: grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$' VERSION
+
+      - name: Test Docker shortcuts
+        shell: bash
+        run: |
+          source shell/docker.sh
+          d --version
+          d c version
+

@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 alias art="php artisan"
 
 alias migrate="php artisan migrate"
